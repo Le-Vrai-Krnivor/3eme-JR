@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbes Irréguliers - Niveaux de ceinture</title>
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-color: #333;
+            --title-color: #4a69bd;
+            --button-bg: #e0e5ec;
+            --button-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+            --button-inset-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #2d3748;
+            --text-color: #e2e8f0;
+            --title-color: #63b3ed;
+            --button-bg: #2d3748;
+            --button-shadow: 5px 5px 10px #1a202c, -5px -5px 10px #4a5568;
+            --button-inset-shadow: inset 5px 5px 10px #1a202c, inset -5px -5px 10px #4a5568;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            color: var(--title-color);
+            margin-bottom: 1rem;
+        }
+        h2 {
+            margin-bottom: 2rem;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 0 auto;
+        }
+        .neumorphic-button {
+            padding: 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--button-bg);
+            box-shadow: var(--button-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .neumorphic-button:hover {
+            box-shadow: var(--button-inset-shadow);
+        }
+        .neumorphic-button:active {
+            box-shadow: var(--button-inset-shadow);
+            transform: translateY(2px);
+        }
+        .white { color: #f8f8f8; }
+        .yellow { color: #ffd700; }
+        .orange { color: #ffa500; }
+        .green { color: #00ff00; }
+        .blue { color: #1e90ff; }
+        .brown { color: #deb887; }
+        .black { color: #d3d3d3; }
+
+        #theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: var(--button-shadow);
+        }
+
+        #questionnaire {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            box-shadow: var(--button-inset-shadow);
+        }
+
+        #submit-btn, #next-btn {
+            margin-top: 1rem;
+        }
+
+        #result {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        #summary {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .correct {
+            color: #4caf50;
+        }
+
+        .incorrect {
+            color: #f44336;
+        }
+
+        /* From Uiverse.io by jeremyssocial */ 
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes typeAndDelete {
+  0%,
+  10% {
+    width: 0;
+  }
+  45%,
+  55% {
+    width: 6.2em;
+  } /* adjust width based on content */
+  90%,
+  100% {
+    width: 0;
+  }
+}
+
+.terminal-loader {
+  border: 0.1em solid #333;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1em;
+  padding: 1.5em 1em;
+  width: 12em;
+  margin: 100px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.terminal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background-color: #333;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 0 0.4em;
+  box-sizing: border-box;
+}
+
+.terminal-controls {
+  float: right;
+}
+
+.control {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.4em;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.control.close {
+  background-color: #e33;
+}
+
+.control.minimize {
+  background-color: #ee0;
+}
+
+.control.maximize {
+  background-color: #0b0;
+}
+
+.terminal-title {
+  float: left;
+  line-height: 1.5em;
+  color: #eee;
+}
+
+.text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid green; /* Cursor */
+  animation: typeAndDelete 4s steps(11) infinite,
+    blinkCursor 0.5s step-end infinite alternate;
+  margin-top: 1.5em;
+}
+
+    </style>
+</head>
+<body>
+    <button id="theme-toggle">Changer de thème</button>
+    <div class="container">
+        <h1><u>Verbes Irréguliers | révision</u></h1>
+        <h2>Choisissez votre niveau :</h2>
+
+        <div class="button-container">
+            <button class="neumorphic-button white" id="white-belt">Ceinture Blanche</button>
+            <button class="neumorphic-button yellow" id="yellow-belt">Ceinture Jaune</button>
+            <button class="neumorphic-button orange" id="orange-belt">Ceinture Orange</button>
+            <button class="neumorphic-button green" id="green-belt">Ceinture Verte</button>
+            <button class="neumorphic-button blue">Ceinture Bleue</button>
+            <button class="neumorphic-button brown">Ceinture Marron</button>
+            <button class="neumorphic-button black">Ceinture Noire</button>
+        </div>
+
+        <div id="questionnaire">
+            <h2 id="questionnaire-title"></h2>
+            <div id="question-container"></div>
+            <button id="next-btn" class="neumorphic-button">Suivant</button>
+            <div id="result"></div>
+            <div id="summary"></div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const whiteBeltBtn = document.getElementById('white-belt');
+        const yellowBeltBtn = document.getElementById('yellow-belt');
+        const orangeBeltBtn = document.getElementById('orange-belt');
+        const greenBeltBtn = document.getElementById('green-belt');
+        const questionnaire = document.getElementById('questionnaire');
+        const questionnaireTitle = document.getElementById('questionnaire-title');
+        const questionContainer = document.getElementById('question-container');
+        const nextBtn = document.getElementById('next-btn');
+        const resultDiv = document.getElementById('result');
+        const summaryDiv = document.getElementById('summary');
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = 'Mode sombre';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = 'Mode clair';
+            }
+        });
+
+        const whiteBeltQuestions = [
+            { verb: "parier", answer: "bet bet bet" },
+            { verb: "Diffuser/émettre", answer: "broadcast broadcast broadcast" },
+            { verb: "coûter", answer: "cost cost cost" },
+            { verb: "couper", answer: "cut cut cut" },
+            { verb: "frapper/atteindre", answer: "hit hit hit" },
+            { verb: "blesser", answer: "hurt hurt hurt" },
+            { verb: "permettre/louer", answer: "let let let" },
+            { verb: "mettre", answer: "put put put" },
+            { verb: "fixer", answer: "set set set" },
+            { verb: "fermer", answer: "shut shut shut" },
+            { verb: "répandre", answer: "spread spread spread" }
+        ];
+
+        const yellowBeltQuestions = [
+            { verb: "être", answer: "be was/were been" },
+            { verb: "mordre", answer: "bite bit bitten" },
+            { verb: "souffler", answer: "blow blew blown" },
+            { verb: "faire", answer: "do did done" },
+            { verb: "dessiner", answer: "draw drew drawn" },
+            { verb: "aller", answer: "go went gone" },
+            { verb: "être allongé", answer: "lie lay lain" },
+            { verb: "voir", answer: "see saw seen" },
+            { verb: "montrer", answer: "show showed shown" },
+            { verb: "porter/supporter", answer: "bear bore borne" },
+            { verb: "jurer", answer: "swear swore sworn" },
+            { verb: "(se) déchirer", answer: "tear tore torn" },
+            { verb: "porter (des vêtements)", answer: "wear wore worn" }
+        ];
+
+        const orangeBeltQuestions = [
+            { verb: "commencer", answer: "begin began begun" },
+            { verb: "boire", answer: "drink drank drunk" },
+            { verb: "sonner", answer: "ring rang rung"},
+            { verb: "chanter", answer: "sing sang sung" },
+            { verb: "couler", answer: "sink sank sunk" },
+            { verb: "Bondir/jaillir", answer: "spring sprang sprung" },
+            { verb: "puer", answer: "stink stank stunk" },
+            { verb: "nager", answer: "swim swam swum" },
+            { verb: "devenir", answer: "become became become" },
+            { verb: "venir", answer: "come came come" },
+            { verb: "surmonter", answer: "overcome overcame overcome" },
+            { verb: "courir", answer: "run ran run" }
+        ];
+
+        const greenBeltQuestions = [
+ 
+            { verb: "voler", answer: "fly flew flown" },
+            { verb: "grandir", answer: "grow grew grown" },
+            { verb: "savoir/connaitre", answer: "know knew known" },
+            { verb: "jeter", answer: "throw threw thrown" },
+            { verb: "apporter", answer: "bring brought brought" },
+            { verb: "acheter", answer: "buy bought bought" },
+            { verb: "attraper", answer: "catch caught caught" },
+            { verb: "penser", answer: "think thought tought" }
+        ];
+
+        let currentQuestions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestion];
+            questionContainer.innerHTML = `
+                <div class="question">
+                    <label>Donnez le verbe infinitif, le prétérit, le participe passé de "${question.verb}" séparés chacun d'un espace:</label>
+                    <input type="text" id="answer-input" required>
+                </div>
+            `;
+        }
+
+        function nextQuestion() {
+            const answerInput = document.getElementById('answer-input');
+            userAnswers.push(answerInput.value.toLowerCase().trim());
+            
+            currentQuestion++;
+            if (currentQuestion < currentQuestions.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            nextBtn.style.display = 'none';
+            questionContainer.style.display = 'none';
+
+            let score = 0;
+            let summaryHTML = '<h3>Récapitulatif :</h3>';
+
+            for (let i = 0; i < currentQuestions.length; i++) {
+                const userAnswer = userAnswers[i].replace(/\s+/g, ' ').trim();
+                const correctAnswer = currentQuestions[i].answer.replace(/\s+/g, ' ').trim();
+                const isCorrect = userAnswer === correctAnswer;
+                if (isCorrect) score++;
+
+                summaryHTML += `
+                    <p>
+                        <strong>${currentQuestions[i].verb} :</strong> 
+                        <span class="${isCorrect ? 'correct' : 'incorrect'}">
+                            ${userAnswers[i]} ${isCorrect ? '✓' : '✗'}
+                        </span>
+                        ${!isCorrect ? ` (Correct : ${currentQuestions[i].answer})` : ''}
+                    </p>
+                `;
+            }
+
+            const percentage = (score / currentQuestions.length) * 100;
+            resultDiv.innerHTML = `<h3>Votre score : ${score}/${currentQuestions.length} (${percentage.toFixed(2)}%)</h3>`;
+            summaryDiv.innerHTML = summaryHTML;
+        }
+
+        function startQuestionnaire(questions, title) {
+            questionnaire.style.display = 'block';
+            questionnaireTitle.textContent = title;
+            currentQuestions = questions;
+            currentQuestion = 0;
+            userAnswers = [];
+            nextBtn.style.display = 'block';
+            questionContainer.style.display = 'block';
+            resultDiv.innerHTML = '';
+            summaryDiv.innerHTML = '';
+            displayQuestion();
+        }
+
+        whiteBeltBtn.addEventListener('click', () => {
+            startQuestionnaire(whiteBeltQuestions, 'Questionnaire Ceinture Blanche');
+        });
+
+        yellowBeltBtn.addEventListener('click', () => {
+            startQuestionnaire(yellowBeltQuestions, 'Questionnaire Ceinture Jaune');
+        });
+
+        orangeBeltBtn.addEventListener('click', () => {
+            startQuestionnaire(orangeBeltQuestions, 'Questionnaire Ceinture Orange');
+        });
+
+        greenBeltBtn.addEventListener('click', () => {
+            startQuestionnaire(greenBeltQuestions, 'Questionnaire Ceinture Verte');
+        });
+        nextBtn.addEventListener('click', nextQuestion);
+
+        // Initialize
+        questionnaire.style.display = 'none';
+    </script>
+</body>
+</html>

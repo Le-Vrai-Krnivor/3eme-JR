@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3B - Collège Jean Rostand Orvault</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: #4a69bd;
+            --header-text: white;
+            --footer-bg: #f1f2f6;
+            --tools-bg: #f1f2f6;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #333333;
+            --text-color: #ffffff;
+            --header-bg: #1e3799;
+            --header-text: #ffffff;
+            --footer-bg: #4a4a4a;
+            --tools-bg: #4a4a4a;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 1rem;
+        }
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+        footer {
+            background-color: var(--footer-bg);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        .tools {
+            background-color: var(--tools-bg);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        #theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: var(--tools-bg);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>3B - Collège Jean Rostand Orvault</h1>
+    </header>
+    <button id="theme-toggle">Changer de thème</button>
+    <main>
+        <h2>Bienvenue sur le site !</h2><a href="https://whatsapp.com/channel/0029VakeuRtGufJ2jmv7jx0T">Suivre les mises à jour du site</a><p>ou taper dans recherche de chaîne sur WhatsApp : <strong>Site Web 3B JR Orvault</strong></p>
+        <p>Ce site est encore en beta, si vous trouvez un bug merci de le signaler a Arthur.</p>
+        
+        <div class="tools">
+            <h3>Outils :</h3>
+            <ul>
+                <li><a href="vi.html">Verbe Irréguliers réviseur</a></li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>Site web par Arthur</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = 'Thème sombre';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = 'Thème clair';
+            }
+        });
+    </script>
+</body>
+</html>
