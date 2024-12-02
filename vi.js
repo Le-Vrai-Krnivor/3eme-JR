@@ -4,6 +4,7 @@ const themeToggle = document.getElementById('theme-toggle');
         const yellowBeltBtn = document.getElementById('yellow-belt');
         const orangeBeltBtn = document.getElementById('orange-belt');
         const greenBeltBtn = document.getElementById('green-belt');
+        const blueBeltBtn = document.getElementById('blue-belt');
         const questionnaire = document.getElementById('questionnaire');
         const questionnaireTitle = document.getElementById('questionnaire-title');
         const questionContainer = document.getElementById('question-container');
@@ -77,6 +78,21 @@ const themeToggle = document.getElementById('theme-toggle');
             { verb: "attraper", answer: "catch caught caught" },
             { verb: "penser", answer: "think thought thought" }
         ];
+
+        const blueBeltQuestions = [
+            { verb: "parier", answer: "bet bet bet" },
+            { verb: "Diffuser/émettre", answer: "broadcast broadcast broadcast" },
+            { verb: "coûter", answer: "cost cost cost" },
+            { verb: "couper", answer: "cut cut cut" },
+            { verb: "frapper/atteindre", answer: "hit hit hit" },
+            { verb: "blesser", answer: "hurt hurt hurt" },
+            { verb: "permettre/louer", answer: "let let let" },
+            { verb: "mettre", answer: "put put put" },
+            { verb: "fixer", answer: "set set set" },
+            { verb: "fermer", answer: "shut shut shut" },
+            { verb: "répandre", answer: "spread spread spread" }
+        ];
+
 
         let currentQuestions = [];
         let currentQuestion = 0;
@@ -160,6 +176,10 @@ const themeToggle = document.getElementById('theme-toggle');
 
         greenBeltBtn.addEventListener('click', () => {
             startQuestionnaire(greenBeltQuestions, 'Questionnaire Ceinture Verte');
+        });
+
+        blueBeltBtn.addEventListerner('click', () => {
+            startQuestionnaire(blueBeltQuestions, 'Questionnaire Ceinture Bleue');
         });
         nextBtn.addEventListener('click', nextQuestion);
 
