@@ -178,9 +178,11 @@ const themeToggle = document.getElementById('theme-toggle');
             startQuestionnaire(greenBeltQuestions, 'Questionnaire Ceinture Verte');
         });
 
-        blueBeltBtn.addEventListerner('click', () => {
-            startQuestionnaire(blueBeltQuestions, 'Questionnaire Ceinture Bleue');
+        blueBeltBtn.addEventListener('click', () => {
+            startQuestionnaire(greenBeltQuestions, 'Questionnaire Ceinture Bleue');
         });
+
+     
         nextBtn.addEventListener('click', nextQuestion);
 
         // Initialize
