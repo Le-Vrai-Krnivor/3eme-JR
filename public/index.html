@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ème- Tools</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/buttons.css">
+</head>
+<body>
+    <header>
+        <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=3eme%20JR" alt="3eme JR Banner" style="width: 100%; height: auto; max-width: 100%;">
+    </header>
+    <main>
+        <h2>Bienvenue sur le site !</h2>
+        <div class="updates-section">
+            <button class="main-button" onclick="window.location.href='https://whatsapp.com/channel/0029VakeuRtGufJ2jmv7jx0T'">
+                Suivre les mises à jour du site
+            </button>
+            <p>ou taper dans recherche de chaîne sur WhatsApp : <strong>Site Web 3ème</strong></p>
+        </div>
+
+        <div class="tools">
+            <h3>Outils :</h3>
+            <div class="tools-grid">
+                <button class="tool-button" onclick="window.location.href='vi.html'">
+                    Verbes Irréguliers réviseur
+                </button>
+            </div>
+        </div>
+    </main>
+<img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=Version%20:%201.0.2%&reversal=false&section=footer&textBg=false" alt="3eme JR Banner" style="width: 100%; height: auto; max-width: 100%;">
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeToggle.textContent = 'Thème sombre';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = 'Thème clair';
+            }
+        });
+    </script>
+</body>
+</html>

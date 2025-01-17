@@ -1,0 +1,65 @@
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tools {
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+footer {
+    background-color: var(--footer-bg);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.tools {
+    background-color: var(--tools-bg);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: var(--tools-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
