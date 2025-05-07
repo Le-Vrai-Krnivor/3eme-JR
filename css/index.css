@@ -1,65 +1,74 @@
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
     margin: 0;
-    padding: 20px;
-    background-color: #f8fafc;
-    color: #1e293b;
-}
-
-h1, h2, h3 {
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-header {
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f8fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
     text-align: center;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-
-.tools {
-    border-radius: 20px;
-    padding: 2rem;
-    margin-top: 2rem;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-footer {
-    background-color: var(--footer-bg);
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-}
-
-.tools {
-    background-color: var(--tools-bg);
-    border-radius: 5px;
-    padding: 1rem;
-    margin-top: 2rem;
-}
-
-#theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    background-color: var(--tools-bg);
-    color: var(--text-color);
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    min-width: 320px;
+    max-width: 90vw;
+  }
+  .tools-btn {
+    display: inline-block;
+    padding: 0.9em 2.2em;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: #3b82f6;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-}
+    transition: background 0.2s;
+    margin-bottom: 1.5rem;
+  }
+  .tools-btn:hover {
+    background: #2563eb;
+  }
+  .tools-list {
+    display: none;
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  .tools-list.show {
+    display: block;
+    animation: fadeIn 0.4s;
+  }
+  .tools-list li {
+    margin: 0.7em 0;
+  }
+  .tools-list a {
+    text-decoration: none;
+    color: #2563eb;
+    font-size: 1.08rem;
+    padding: 0.3em 0.7em;
+    border-radius: 5px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tools-list a:hover {
+    background: #eef2ff;
+    color: #1d4ed8;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  @media (max-width: 500px) {
+    .container {
+      padding: 1.5rem 0.5rem;
+      min-width: unset;
+    }
+    .tools-btn {
+      font-size: 1rem;
+      padding: 0.8em 1.5em;
+    }
+  }

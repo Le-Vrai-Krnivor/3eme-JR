@@ -1,49 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3ème- Tools</title>
-    <link rel="stylesheet" href="css/buttons.css">
-    <link rel="stylesheet" href="css/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/index.css">
+  <title>3eme - Tools</title>
 </head>
 <body>
-    <header>
-        <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=3eme%20JR" alt="3eme JR Banner" style="width: 100%; height: auto; max-width: 100%;">
-    </header>
-    <main>
-        <h2>Bienvenue sur le site !</h2>
-        <div class="updates-section">
-            <button class="main-button" onclick="window.location.href='https://whatsapp.com/channel/0029VakeuRtGufJ2jmv7jx0T'">
-                Suivre les mises à jour du site
-            </button>
-            <p>ou taper dans recherche de chaîne sur WhatsApp : <strong>Site Web 3ème</strong></p>
-        </div>
+  <div class="container">
+    <button class="tools-btn" id="toolsBtn">Nos outils</button>
+    <ul class="tools-list" id="toolsList">
+      <li><a href="vi.html">Verbes Irréguliers reviseur</a></li>
+    </ul>
+  </div>
+  <script>
+    const btn = document.getElementById('toolsBtn');
+    const list = document.getElementById('toolsList');
+    btn.addEventListener('click', () => {
+      list.classList.toggle('show');
+    });
 
-        <div class="tools">
-            <h3>Outils :</h3>
-            <div class="tools-grid">
-                <button class="tool-button" onclick="window.location.href='vi.html'">
-                    Verbes Irréguliers réviseur
-                </button>
-            </div>
-        </div>
-    </main>
-<img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=Version%20:%201.0.2%&reversal=false&section=footer&textBg=false" alt="3eme JR Banner" style="width: 100%; height: auto; max-width: 100%;">
+// TRACKEURS
+  // Mesure du temps passé sur la page
+  let start = Date.now();
+  window.addEventListener('beforeunload', function () {
+    let timeSpent = Math.round((Date.now() - start) / 1000); // en secondes
+    document.cookie = "timeSpent=" + timeSpent + ";path=/";
+    // Envoi au webhook Discord 
+    fetch('https://discord.com/api/webhooks/1369638939710722161/awO5-EviG37KzFf0H_PsnGD4a798ES3aRIBCBwBycAAmKgieYO1SHp3ZW-rxdmtBQmZU', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({content: `Temps passé sur le site : ${timeSpent} secondes`})
+    });
+  });
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeToggle.textContent = 'Thème sombre';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeToggle.textContent = 'Thème clair';
-            }
-        });
-    </script>
+  </script>
 </body>
 </html>
