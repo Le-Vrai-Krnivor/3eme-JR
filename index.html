@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/index.css">
@@ -14,26 +15,17 @@
     </ul>
   </div>
   <script>
-    const btn = document.getElementById('toolsBtn');
-    const list = document.getElementById('toolsList');
-    btn.addEventListener('click', () => {
-      list.classList.toggle('show');
-    });
+ const webhookURL = "https://discord.com/api/webhooks/1369638939710722161/awO5-EviG37KzFf0H_PsnGD4a798ES3aRIBCBwBycAAmKgieYO1SHp3ZW-rxdmtBQmZU"; // Remplacez par votre URL de webhook
 
-// TRACKEURS
-  // Mesure du temps passé sur la page
-  let start = Date.now();
-  window.addEventListener('beforeunload', function () {
-    let timeSpent = Math.round((Date.now() - start) / 1000); // en secondes
-    document.cookie = "timeSpent=" + timeSpent + ";path=/";
-    // Envoi au webhook Discord 
-    fetch('https://discord.com/api/webhooks/1369638939710722161/awO5-EviG37KzFf0H_PsnGD4a798ES3aRIBCBwBycAAmKgieYO1SHp3ZW-rxdmtBQmZU', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({content: `Temps passé sur le site : ${timeSpent} secondes`})
-    });
+let startTime = Date.now();
+
+window.addEventListener("unload", () => {
+  const timeSpentSeconds = Math.round((Date.now() - startTime) / 1000);
+  const payload = JSON.stringify({
+    content: `Utilisateur a passé ${timeSpentSeconds} secondes sur la page.`,
   });
 
+  // Utilisation de sendBeacon pour envoyer les données au webhook Discord
+  navigator.sendBeacon(webhookURL, new Blob([payload], { type: "application/json" }));
+});
   </script>
-</body>
-</html>
